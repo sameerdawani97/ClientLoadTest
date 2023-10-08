@@ -8,7 +8,7 @@ public class ClientTest {
   public void testWithJava() throws IOException {
     // Simulate command-line arguments by creating an args array
 //    String[] args = {"arg1", "arg2", "arg3"};
-    String[] args = {"10","10","2","http://ec2-user@ec2-34-208-62-63.us-west-2.compute.amazonaws.com:8080/assignment1_war/albums"};
+    String[] args = {"10","30","2","http://ec2-user@ec2-35-87-39-16.us-west-2.compute.amazonaws.com:8080/assignment1_war/albums"};
 
     // Call the main method with the simulated arguments
     ClientConcurrent.main(args);
@@ -21,7 +21,7 @@ public class ClientTest {
   public void testWithGo() throws IOException {
     // Simulate command-line arguments by creating an args array
 //    String[] args = {"arg1", "arg2", "arg3"};
-    String[] args = {"10","10","2","http://localhost:8080/albums"};
+    String[] args = {"10","10","2","http://ec2-user@ec2-35-87-39-16.us-west-2.compute.amazonaws.com:8080/albums"};
 
     // Call the main method with the simulated arguments
     ClientConcurrent.main(args);

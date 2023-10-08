@@ -1,6 +1,6 @@
-
 import static java.util.Collections.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -75,8 +75,8 @@ public class ClientConcurrent {
     Thread[] initialThreads = new Thread[INITIAL_THREADS_SIZE];
     List<Thread> arrayList = new ArrayList<>();
     List<Thread> groupThreads = Collections.synchronizedList(arrayList);
-    List<RequestInfo> arrayList1 = new ArrayList<>();
-    List<RequestInfo> csvRecord = Collections.synchronizedList(arrayList1);
+    List<RequestInfo> csvRecord = new ArrayList<>();
+    //List<RequestInfo> csvRecord = Collections.synchronizedList(arrayList1);
 
 
     for (int i = 0; i < INITIAL_THREADS_SIZE; i++) {
@@ -95,7 +95,7 @@ public class ClientConcurrent {
     startTime = System.currentTimeMillis();
 
     for (int i = 0; i < numOfGroups; i++) {
-      System.out.println(i);
+      //System.out.println(i);
       // Create and start threadGroupSize threads
       //ExecutorService executor = Executors.newFixedThreadPool(threadGroupSize);
 
@@ -135,7 +135,7 @@ public class ClientConcurrent {
     System.out.println("99th percentile Latency: " + calculate99thPercentile(values) + " milliseconds");
     System.out.println("Maximum Latency: " + max(values) + " milliseconds");
     System.out.println("Minimum Latency: " + min(values) + " milliseconds");
-
+    writeCsv(csvRecord);
 
   }
 
@@ -187,6 +187,26 @@ public class ClientConcurrent {
       double upperValue = values.get(upperIndex);
       double fraction = index - lowerIndex;
       return lowerValue + fraction * (upperValue - lowerValue);
+    }
+  }
+
+  private static void writeCsv(List<RequestInfo> csvRecord){
+    String filePath = "responseRecord.csv";
+
+    try (FileWriter writer = new FileWriter(filePath)) {
+      // Write header row
+      writer.append("StartTime, RequestType, Latency, StatusCode");
+      writer.append("\n");
+
+      for (RequestInfo requestInfo : csvRecord){
+        writer.append(requestInfo.startTime + ", " + requestInfo.requestType + ", "
+            + requestInfo.latency + ", " + requestInfo.statusCode);
+        writer.append("\n");
+      }
+
+      System.out.println("CSV file written successfully.");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 

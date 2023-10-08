@@ -10,6 +10,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * This class is main class to call all threads to execute multithreaded program.
+ */
 public class ClientConcurrent {
   private static final int INITIAL_THREADS_SIZE = 10;
   private static final int NUM_REQUESTS_PER_THREAD_FOR_INITIAL = 100;
@@ -125,6 +128,13 @@ public class ClientConcurrent {
     System.out.println("Throughput: " + throughput + "/sec");
   }
 
+  /**
+   * This method is used to call 1000 request of each type.
+   * @param ipAddress ipAddress
+   * @param numRequests numRequests
+   * @param requestGet requestGet
+   * @param requestPost requestPost
+   */
   private static void callRequests(String ipAddress, int numRequests, HttpRequest requestGet, HttpRequest requestPost) {
     //HttpClient httpClient = HttpClient.newHttpClient();
     for (int i = 0; i < numRequests; i++) {
@@ -142,6 +152,13 @@ public class ClientConcurrent {
     }
   }
 
+  /**
+   * This method is used to send post request to api
+   * @param ipAddr ipAddr
+   * @param requestPost requestPost
+   * @throws IOException IOException
+   * @throws InterruptedException InterruptedException
+   */
   private static void sendPostRequest(String ipAddr, HttpRequest requestPost)
       throws IOException, InterruptedException {
 
@@ -172,6 +189,12 @@ public class ClientConcurrent {
 
   }
 
+  /**
+   * This method is used to get post request to api
+   * @param ipAddr ipAddr
+   * @param request request for get
+   * @throws IOException IOException
+   */
   private static void sendGetRequest(String ipAddr, HttpRequest request) throws IOException {
 
     try {

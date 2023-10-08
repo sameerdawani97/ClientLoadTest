@@ -139,6 +139,11 @@ public class ClientConcurrent {
 
   }
 
+  /**
+   * This method is to calculate median value
+   * @param values values
+   * @return median value as double.
+   */
   private static double calculateMedian(List<Long> values){
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("The list of values is empty or null.");
@@ -158,6 +163,12 @@ public class ClientConcurrent {
     }
   }
 
+  /**
+   * This method is used to calculate mean value.
+   * @param csvRecord csvRecord
+   * @param values values
+   * @return mean value
+   */
   private static double calculateMean(List<RequestInfo> csvRecord, List<Long> values){
     double mean = 0.0;
     for (RequestInfo requestInfo : csvRecord){
@@ -168,6 +179,11 @@ public class ClientConcurrent {
     return mean;
   }
 
+  /**
+   * This method is to calculate the 99th percentile.
+   * @param values values
+   * @return 99th percentile
+   */
   private static double calculate99thPercentile(List<Long> values){
     if (values == null || values.isEmpty()) {
       throw new IllegalArgumentException("The list of values is empty or null.");
@@ -190,6 +206,10 @@ public class ClientConcurrent {
     }
   }
 
+  /**
+   * Method to write to csv file
+   * @param csvRecord csvRecord
+   */
   private static void writeCsv(List<RequestInfo> csvRecord){
     String filePath = "responseRecord.csv";
 
@@ -210,6 +230,14 @@ public class ClientConcurrent {
     }
   }
 
+  /**
+   * This method is used to call 1000 request of each type.
+   * @param ipAddress ipAddress
+   * @param numRequests numRequests
+   * @param requestGet requestGet
+   * @param requestPost requestPost
+   * @param csvRecord csvRecord
+   */
   private static void callRequests(String ipAddress, int numRequests, HttpRequest requestGet, HttpRequest requestPost, List<RequestInfo> csvRecord) {
     //HttpClient httpClient = HttpClient.newHttpClient();
     for (int i = 0; i < numRequests; i++) {
@@ -227,6 +255,14 @@ public class ClientConcurrent {
     }
   }
 
+  /**
+   * This method is used to send post request to api
+   * @param ipAddr ipAddr
+   * @param requestPost requestPost
+   * @param csvRecord csvRecord
+   * @throws IOException IOException
+   * @throws InterruptedException InterruptedException
+   */
   private static void sendPostRequest(String ipAddr, HttpRequest requestPost, List<RequestInfo> csvRecord)
       throws IOException, InterruptedException {
 
@@ -262,6 +298,13 @@ public class ClientConcurrent {
 
   }
 
+  /**
+   * This method is used to send get request to api.
+   * @param ipAddr ipAddr
+   * @param request request
+   * @param csvRecord csvRecord
+   * @throws IOException IOException
+   */
   private static void sendGetRequest(String ipAddr, HttpRequest request, List<RequestInfo> csvRecord) throws IOException {
 
     try {
